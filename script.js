@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
 
 
 //inputtan enter la sehir ismini alma
-var cityname = (e) => {
+(e) => {
     if (e.keyCode == '13')
         console.log(inputCity.value);
 
@@ -64,4 +64,41 @@ async function getData() {
 
 
 }
+
+var cities = [
+    { name: 'Körfez', utc: '+3' }
+];
+
+
+
+//yerel saat
+function setTimes() {
+    var date = new Date();
+
+    var hours = (date.getUTCHours() > 11) ? date.getUTCHours() - 12 + parseInt(cities[0].utc, 10) : date.getUTCHours() + parseInt(cities[0].utc, 10);
+
+    cities[0].hours = (hours / 12) * 360;
+    console.log("saat" + cities[0].hours);
+    cities[0].minoutes = (date.getUTCMinutes() / 60) * 360;
+    console.log("dakika" + cities[0].minoutes);
+
+
+}
+setTimes()
+const saat = document.querySelector(".hour");
+console.log(saat);
+const dakika = document.querySelector(".min");
+
+//saati akrep ve yelkovana aktar
+function update() {
+
+    saat.style.transform = "rotate(" + cities[0].hours + "deg)";
+    dakika.style.transform = 'rotate(' + cities[0].minoutes + 'deg)';
+}
+update();
+
+
+
+
+
 
